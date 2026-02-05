@@ -86,7 +86,7 @@ def main():
                 logits_list.append(out.detach().cpu().numpy())
 
             logits = np.concatenate(logits_list, axis=0)
-            LOGIT_CLIP = 5.0 
+            LOGIT_CLIP = 3.0 
             logits = np.clip(logits, -LOGIT_CLIP, LOGIT_CLIP)
             sum_logits += logits
 
