@@ -26,7 +26,7 @@ def main():
     print("Device name:", torch.cuda.get_device_name(0) if torch.cuda.is_available() else "CPU")
 
     # 1) 모델 파일들 가져오기
-    model_paths = sorted(glob.glob(os.path.join(MODEL_SAVE_DIR, "resnet18_epoch*_acc*.pth")))
+    model_paths = sorted(glob.glob(os.path.join(MODEL_SAVE_DIR, "resnet18_seed*_epoch*_acc*.pth")))
     if len(model_paths) == 0:
         raise FileNotFoundError("No saved models found. Check MODEL_SAVE_DIR and filename pattern.")
 
