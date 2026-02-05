@@ -24,7 +24,7 @@ BEST_MODEL_PATH = os.path.join(
     "resnet18_pneumonia_best.pth"
 )
 
-BATCH_SIZE = 64
+BATCH_SIZE = 256
 EPOCHS = 30
 LR = 1e-4
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
@@ -83,7 +83,7 @@ def main():
     # 다만, VSCode/환경 따라 문제 생기면 num_workers=0으로 낮추면 됨
     train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True,
                               num_workers=4, pin_memory=torch.cuda.is_available())
-    test_loader  = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=True,
+    test_loader  = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False,
                               num_workers=4, pin_memory=torch.cuda.is_available())
 
     # =====================================================

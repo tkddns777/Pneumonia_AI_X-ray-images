@@ -26,7 +26,10 @@ checkpoint = torch.load(MODEL_PATH, map_location=DEVICE)
 class_names = checkpoint["class_names"]
 
 model = models.resnet18(pretrained=False)
-model.fc = nn.Linear(model.fc.in_features, len(class_names))
+model.fc = nn.Sequential(
+        # nn.Dropout(p=0.5),  # 필요시 여기에 활성화
+        nn.Linear(model.fc.in_features, len(class_names))
+    )
 model.to(DEVICE)
 
 model.load_state_dict(checkpoint["model_state_dict"])
@@ -41,7 +44,7 @@ print(
 )
 
 
-TEST_DIR = r"C:\Users\user\OneDrive\바탕 화면\코딩 연습\archive\val"
+TEST_DIR = r"C:\Users\user\OneDrive\바탕 화면\코딩 데이터\Pneumonia CT images\test"
 
 transform = transforms.Compose([
     transforms.Resize((384, 384)),
@@ -70,7 +73,7 @@ with torch.no_grad():
         labels = labels.to(DEVICE)
 
         outputs = model(images)
-        preds = outputs.argmax(dim=1)
+        preds = outputs.argmax(dim=1
 
         all_preds.extend(preds.cpu().numpy())
         all_labels.extend(labels.cpu().numpy())
