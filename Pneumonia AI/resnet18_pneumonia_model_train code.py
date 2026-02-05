@@ -96,9 +96,9 @@ def main(seed):
     # 지금은 __main__ 가드가 있으니 num_workers 사용 가능
     # 다만, VSCode/환경 따라 문제 생기면 num_workers=0으로 낮추면 됨
     train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True,
-                              num_workers=4, pin_memory=torch.cuda.is_available())
+                              num_workers=0, pin_memory=torch.cuda.is_available())
     test_loader  = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False,
-                              num_workers=4, pin_memory=torch.cuda.is_available())
+                              num_workers=0, pin_memory=torch.cuda.is_available())
 
     # =====================================================
     # Model (원본 그대로)
@@ -125,7 +125,7 @@ def main(seed):
     for epoch in range(EPOCHS):
         # ------------------
         # Train
-        # ------------------
+        # ------------------,
         model.train()
         train_preds, train_labels = [], []
         running_loss = 0
