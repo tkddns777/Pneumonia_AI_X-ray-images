@@ -146,7 +146,7 @@ def main():
         plt.ylabel("True")
         plt.tight_layout()
         plt.show(block=False)
-        plt.pause(1)
+        plt.pause(0.5)
         plt.close()
 
         # ------------------
@@ -180,13 +180,19 @@ def main():
         plt.ylabel("True")
         plt.tight_layout()
         plt.show(block=False)
-        plt.pause(1)
+        plt.pause(0.5)
+        plt.close()
 
         # ------------------
         # Save best model (원본 그대로 + model_name만 정정)
         # ------------------
-        if test_acc > best_test_acc:
-            best_test_acc = test_acc
+        SAVE_THRESHOLD = 0.91
+
+        if test_acc >= SAVE_THRESHOLD:
+            save_path = os.path.join(
+                MODEL_SAVE_DIR,
+                f"resnet18_epoch{epoch+1:03d}_acc{test_acc:.3f}.pth"
+            )
 
             torch.save({
                 "epoch": epoch + 1,
@@ -194,8 +200,8 @@ def main():
                 "optimizer_state_dict": optimizer.state_dict(),
                 "test_accuracy": test_acc,
                 "class_names": class_names,
-                "model_name": "resnet18",   # ✅ 원본은 resnet50이라 혼동이라서 정정
-            }, BEST_MODEL_PATH)
+                "model_name": "resnet18",
+            }, save_path)
 
             print(f"✅ Best model saved (epoch={epoch+1}, acc={test_acc:.3f})")
 

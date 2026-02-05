@@ -73,7 +73,7 @@ with torch.no_grad():
         labels = labels.to(DEVICE)
 
         outputs = model(images)
-        preds = outputs.argmax(dim=1
+        preds = outputs.argmax(dim=1)
 
         all_preds.extend(preds.cpu().numpy())
         all_labels.extend(labels.cpu().numpy())
