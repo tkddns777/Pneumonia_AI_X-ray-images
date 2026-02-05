@@ -17,7 +17,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 TRAIN_DIR = r"C:\Users\user\OneDrive\바탕 화면\코딩 데이터\Pneumonia CT images\train"
 TEST_DIR  = r"C:\Users\user\OneDrive\바탕 화면\코딩 데이터\Pneumonia CT images\test"
 
-MODEL_SAVE_DIR = r"C:\Users\user\OneDrive\바탕 화면\코딩 연습\Pneumonia AI\Model"
+MODEL_SAVE_DIR = r"C:\Users\user\OneDrive\바탕 화면\코딩 데이터\Pneumonia models"
 
 BEST_MODEL_PATH = os.path.join(
     MODEL_SAVE_DIR,

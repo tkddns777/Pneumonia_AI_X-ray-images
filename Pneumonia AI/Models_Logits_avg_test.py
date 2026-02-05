@@ -10,7 +10,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
-MODEL_SAVE_DIR = r"C:\Users\user\OneDrive\바탕 화면\코딩 연습\Pneumonia AI\Model"
+MODEL_SAVE_DIR = r"C:\Users\user\OneDrive\바탕 화면\코딩 데이터\Pneumonia models"
 TEST_DIR = r"C:\Users\user\OneDrive\바탕 화면\코딩 데이터\Pneumonia CT images\test"
 
 # 1) 모델 파일들 가져오기
