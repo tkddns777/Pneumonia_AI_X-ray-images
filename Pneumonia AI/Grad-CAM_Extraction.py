@@ -268,8 +268,9 @@ def main():
 
         # ✅ 파일명 짧게 (경로 길이 문제 회피)
         # 예: 0_NORMAL_GT_NORMAL_PRED_NORMAL.png
-        short_name = f"{idx}_{cname}_GT_{cname}_PRED_{pred_name}.png"
-        save_path = os.path.join(OUT_DIR, short_name)
+        orig_filename = f"Grad_CAM_{os.path.basename(img_path)}"
+        save_path = os.path.join(OUT_DIR, orig_filename)
+
 
         text = f"GT:{cname}  Pred:{pred_name} ({pred_prob:.3f})"
         overlay_and_save(orig_np, cam01, save_path, text=text, alpha=0.40, show=True)
