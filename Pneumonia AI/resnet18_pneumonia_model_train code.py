@@ -64,7 +64,7 @@ def main(seed):
     # train transform with data augmentation (원본 그대로)
     # =====================================================
     train_transform = transforms.Compose([
-        transforms.RandomResizedCrop(224, scale=(0.9, 1.0)),  # 위치/크기 다양화
+        transforms.RandomResizedCrop(224, scale=(0.7, 1.0)),  # 위치/크기 다양화
         transforms.RandomRotation(15),                        # 촬영 각도 편차
         # transforms.RandomHorizontalFlip(p=0.5),              # 좌우 대칭 허용 (흉부는 OK)
         transforms.ColorJitter(brightness=0.1, contrast=0.1), # 촬영 조건 차이
@@ -111,7 +111,7 @@ def main(seed):
 
     sampler = WeightedRandomSampler(
         weights=sample_weights,
-        num_samples=len(sample_weights),   # 한 epoch당 샘플 수 (보통 전체 길이)
+        num_samples=len(sample_weights)*2,   # 데이터 증강 효과로 epoch당 샘플 수를 제어
         replacement=True                   # 소수 클래스는 중복 허용
     )
 
@@ -119,12 +119,12 @@ def main(seed):
         train_dataset,
         batch_size=BATCH_SIZE,
         sampler=sampler,                   # ✅ shuffle 대신 sampler 사용
-        num_workers=2,
+        num_workers=4,
         pin_memory=torch.cuda.is_available()
     )
 
     test_loader  = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False,
-                              num_workers=2, pin_memory=torch.cuda.is_available())
+                              num_workers=4, pin_memory=torch.cuda.is_available())
 
     # =====================================================
     # Model (원본 그대로)
@@ -132,7 +132,7 @@ def main(seed):
     model = models.resnet18(pretrained=True)
 
     model.fc = nn.Sequential(
-        # nn.Dropout(p=0.5),  # 필요시 여기에 활성화
+        nn.Dropout(p=0.5),  # 필요시 여기에 활성화
         nn.Linear(model.fc.in_features, len(class_names))
     )
 

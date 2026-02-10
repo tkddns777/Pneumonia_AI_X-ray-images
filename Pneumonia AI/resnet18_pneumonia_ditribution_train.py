@@ -108,7 +108,7 @@ def main(seed):
     # train transform with data augmentation (원본 그대로)
     # =====================================================
     train_transform = transforms.Compose([
-        transforms.RandomResizedCrop(224, scale=(0.9, 1.0)),  # 위치/크기 다양화
+        transforms.RandomResizedCrop(224, scale=(0.7, 1.0)),  # 위치/크기 다양화
         transforms.RandomRotation(15),                        # 촬영 각도 편차
         # transforms.RandomHorizontalFlip(p=0.5),              # 좌우 대칭 허용 (흉부는 OK)
         transforms.ColorJitter(brightness=0.1, contrast=0.1), # 촬영 조건 차이
@@ -154,7 +154,7 @@ def main(seed):
 
     sampler = WeightedRandomSampler(
         weights=sample_weights,
-        num_samples=len(sample_weights),   # 한 epoch당 샘플 수 (보통 전체 길이)
+        num_samples=len(sample_weights)*2,   # 데이터 증강 효과로 epoch당 샘플 수를 제어
         replacement=True                   # 소수 클래스는 중복 허용
     )
 
