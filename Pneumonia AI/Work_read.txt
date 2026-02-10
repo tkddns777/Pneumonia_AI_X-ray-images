@@ -1,0 +1,10 @@
+260210
+1. Increase Data augmenatation + Sampler
+2. Grad-CAM ok(No entire red color)
+3. add DenseNet121(Too much memory to large sample numbers)
+4. Resnet18 Size 224->299
+   *https://www.kaggle.com/code/ravaghi/pneumonia-in-chest-x-rays-inceptionv3-grad-cam
+   In the link more specific area is detected
+
++ Decrease 1 layer -> Grad-CAM increase?
+
