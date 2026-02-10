@@ -40,9 +40,9 @@ BEST_MODEL_PATH = os.path.join(
     "resnet18_pneumonia_best.pth"
 )
 
-BATCH_SIZE = 128
-EPOCHS = 3
-LR = 1e-4
+BATCH_SIZE = 256
+EPOCHS = 5
+LR = 2.5e-4
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 
@@ -118,17 +118,17 @@ def main(seed):
         train_dataset,
         batch_size=BATCH_SIZE,
         sampler=sampler,                   # ✅ shuffle 대신 sampler 사용
-        num_workers=2,
+        num_workers=6,
         pin_memory=torch.cuda.is_available()
     )
 
     test_loader  = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False,
-                              num_workers=2, pin_memory=torch.cuda.is_available())
+                              num_workers=0, pin_memory=torch.cuda.is_available())
 
     # =====================================================
     # Model (원본 그대로)
     # =====================================================
-    model = resnet18(weights=ResNet18_Weights.DEFAULT)
+    model = models.resnet18(pretrained=True)
 
     model.fc = nn.Sequential(
         # nn.Dropout(p=0.5),  # 필요시 여기에 활성화
@@ -155,22 +155,18 @@ def main(seed):
         train_preds, train_labels = [], []
         running_loss = 0
 
-        use_amp = (DEVICE == "cuda")
-        scaler = torch.cuda.amp.GradScaler(enabled=use_amp)
-
         for images, labels in tqdm(train_loader, desc=f"Epoch {epoch+1} [Train]"):
-            images, labels = images.to(DEVICE, non_blocking=True), labels.to(DEVICE, non_blocking=True)
+            images, labels = images.to(DEVICE), labels.to(DEVICE)
 
-            optimizer.zero_grad(set_to_none=True)
+            optimizer.zero_grad()
+            outputs = model(images)
+            loss = criterion(outputs, labels)
+            loss.backward()
+            optimizer.step()
 
-            with torch.cuda.amp.autocast(enabled=use_amp):
-                outputs = model(images)
-                loss = criterion(outputs, labels)
-
-            scaler.scale(loss).backward()
-            scaler.step(optimizer)
-            scaler.update()
-
+            running_loss += loss.item()
+            train_preds.extend(outputs.argmax(1).cpu().numpy())
+            train_labels.extend(labels.cpu().numpy())
 
         train_acc = accuracy_score(train_labels, train_preds)
         print(f"[Train] Loss: {running_loss/len(train_loader):.4f} | Acc: {train_acc:.3f}")
