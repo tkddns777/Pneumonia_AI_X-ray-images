@@ -1,0 +1,12 @@
+data:
+  train_dir: "C:/Users/user/OneDrive/바탕 화면/코딩 데이터/Pneumonia CT images/train"
+  test_dir: "C:/Users/user/OneDrive/바탕 화면/코딩 데이터/Pneumonia CT images/test"
+
+training:
+  batch_size: 256
+  epochs: 5
+  lr: 0.00025
+  seeds: [0,100,500]
+
+model:
+  name: resnet18

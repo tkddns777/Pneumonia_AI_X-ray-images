@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+torch
+torchvision
+opencv-python
+numpy
+pillow
+streamlit
+requests
+streamlit-image-comparison
+python-multipart
