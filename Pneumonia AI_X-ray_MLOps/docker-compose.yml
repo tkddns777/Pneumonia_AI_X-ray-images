@@ -14,4 +14,6 @@ services:
     container_name: pneumonia_ui
     ports:
       - "8501:8501"
+    environment:
+      - BACKEND_URL=http://api:8000
     command: streamlit run app_streamlit.py --server.port=8501 --server.address=0.0.0.0

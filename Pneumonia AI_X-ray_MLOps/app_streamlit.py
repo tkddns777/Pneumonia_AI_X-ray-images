@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import requests
 import base64
@@ -5,7 +6,7 @@ from PIL import Image
 import io
 from streamlit_image_comparison import image_comparison
 
-API_URL = "http://127.0.0.1:8000/predict"
+BACKEND_URL = os.getenv("BACKEND_URL", "http://127.0.0.1:8000")
 
 st.set_page_config(page_title="Pneumonia AI", layout="wide")
 
@@ -32,7 +33,7 @@ if uploaded_file:
 
             files = {"file": uploaded_file.getvalue()}
 
-            response = requests.post(API_URL, files=files)
+            response = requests.post(f"{BACKEND_URL}/predict", files=files)
 
             result = response.json()
 
