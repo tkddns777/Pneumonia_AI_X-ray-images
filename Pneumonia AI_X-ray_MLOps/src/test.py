@@ -23,7 +23,7 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 # =====================================================
 # Load trained model
 # =====================================================
-MODEL_PATH = r"C:\Users\user\OneDrive\바탕 화면\코딩\Pneumonia_AI_X-ray\Pneumonia AI_X-ray_MLOps\models\resnet18_best.pth"
+MODEL_PATH = "models/resnet18_best.pth"
 
 checkpoint = torch.load(MODEL_PATH, map_location=DEVICE)
 
@@ -48,7 +48,7 @@ print(
 # =====================================================
 # Test dataset
 # =====================================================
-TEST_DIR = r"C:\Users\user\OneDrive\바탕 화면\코딩 데이터\Pneumonia CT images\test"
+TEST_DIR = "data/test"
 
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
