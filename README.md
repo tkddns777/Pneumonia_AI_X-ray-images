@@ -1,5 +1,6 @@
 # Medical AI / Pneumonia X-ray AI + LLM
-<img width="2453" height="1035" alt="image" src="https://github.com/user-attachments/assets/8212a8e5-f3a9-4a80-8cc2-d7742316084a" />
+<img width="2425" height="1215" alt="image" src="https://github.com/user-attachments/assets/2bd090e4-93a5-4d44-832a-abaf965bfa50" />
+
 
 # Pneumonia AI(accuracy 96.5%)
 <img width="4258" height="2436" alt="Results" src="https://github.com/user-attachments/assets/04d3f429-52d9-46bf-a86b-7a76f69b2f1b" />
