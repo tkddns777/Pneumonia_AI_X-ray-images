@@ -1,0 +1,16 @@
+{
+    "image": "NORMAL2-IM-0369-0001.jpeg",
+    "ground_truth": "NORMAL",
+    "prediction": "NORMAL",
+    "confidence": 0.999998927116394,
+    "activation_center_x": 0.5,
+    "activation_center_y": 0.7142857142857143,
+    "activation_area_ratio": 0.16326530612244897,
+    "activation_region": "Right Lung Lower",
+    "bbox": [
+        2,
+        4,
+        5,
+        6
+    ]
+}

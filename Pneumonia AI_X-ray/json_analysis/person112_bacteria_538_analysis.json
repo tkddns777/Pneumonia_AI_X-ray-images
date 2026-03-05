@@ -1,0 +1,16 @@
+{
+    "image": "person112_bacteria_538.jpeg",
+    "ground_truth": "PNEUMONIA",
+    "prediction": "PNEUMONIA",
+    "confidence": 0.9999994039535522,
+    "activation_center_x": 0.4523809523809524,
+    "activation_center_y": 0.36507936507936506,
+    "activation_area_ratio": 0.3673469387755102,
+    "activation_region": "Left Lung Middle",
+    "bbox": [
+        1,
+        1,
+        5,
+        5
+    ]
+}
